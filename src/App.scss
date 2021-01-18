@@ -1,0 +1,84 @@
+// 2. Import default variables and available mixins.
+@import "uikit/src/scss/variables-theme.scss";
+@import "uikit/src/scss/mixins-theme.scss";
+
+// 4. Import UIkit.
+@import "uikit/src/scss/uikit-theme.scss";
+@import "flatpickr/dist/flatpickr.min.css";
+
+#root {
+    min-height: 100vh;
+}
+
+// https://bootstrapious.com/p/bootstrap-sidebar
+#sidebar {
+    width: 250px;
+    background: #7386D5;
+    color: #fff;
+    transition: all 0.3s;
+
+    .sidebar-header {
+        padding: 20px;
+        font-size: 22px;
+        font-weight: bold;
+        background: #6d7fcc;
+        height: 80px;
+        box-sizing: border-box;
+    }
+
+    ul p {
+        color: #fff;
+        padding: 10px;
+    }
+
+    ul li a {
+        padding: 10px;
+        font-size: 1.1em;
+        display: block;
+        color: #fff;
+
+        &:hover {
+            color: #7386D5;
+            background: #fff;
+        }
+    }
+
+    ul li.uk-active > a, a[aria-expanded="true"] {
+        color: #fff;
+        background: #6d7fcc;
+    }
+}
+
+#form-title {
+    padding: 10px 25px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.main-wrapper {
+    padding: 15px;
+}
+
+.calculated-input {
+    background-color: #F0F0F0;
+}
+
+#lines-section {
+
+    table {
+        margin: 10px 0px 50px 0px;
+
+        th {
+            border-top: 1px #e5e5e5 solid;
+            border-bottom: 1px #e5e5e5 solid;
+        }
+    }
+}
+
+.login-main-container {
+    height: 100vh;
+
+    .login-body-container {
+        width: 500px;
+    }
+}
