@@ -1,10 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import "~reset-css/reset.css";
+
 // 2. Import default variables and available mixins.
-@import "uikit/src/scss/variables-theme.scss";
-@import "uikit/src/scss/mixins-theme.scss";
+@import "~uikit/src/scss/variables-theme.scss";
+@import "~uikit/src/scss/mixins-theme.scss";
 
 // 4. Import UIkit.
-@import "uikit/src/scss/uikit-theme.scss";
-@import "flatpickr/dist/flatpickr.min.css";
+@import "~uikit/src/scss/uikit-theme.scss";
+@import "~flatpickr/dist/flatpickr.min.css";
+
+body {
+    font-family: 'roboto';
+}
 
 #root {
     min-height: 100vh;
@@ -18,35 +25,42 @@
     transition: all 0.3s;
 
     .sidebar-header {
-        padding: 20px;
-        font-size: 22px;
+        text-align: center;
+        padding-top: 22px;
+        font-size: 32px;
         font-weight: bold;
         background: #6d7fcc;
         height: 80px;
         box-sizing: border-box;
     }
 
-    ul p {
-        color: #fff;
-        padding: 10px;
-    }
+    ul {
+        padding-left: 0px;
 
-    ul li a {
-        padding: 10px;
-        font-size: 1.1em;
-        display: block;
-        color: #fff;
+        p {
+            color: #fff;
+            padding: 10px;
+        }
 
-        &:hover {
-            color: #7386D5;
-            background: #fff;
+        li a {
+            padding: 10px;
+            font-size: 1.2em;
+            display: block;
+            color: #fff;
+
+            &:hover {
+                text-decoration: none;
+                color: #7386D5;
+                background: #fff;
+            }
+        }
+
+        li.uk-active > a, a[aria-expanded="true"] {
+            color: #fff;
+            background: #6d7fcc;
         }
     }
 
-    ul li.uk-active > a, a[aria-expanded="true"] {
-        color: #fff;
-        background: #6d7fcc;
-    }
 }
 
 #form-title {

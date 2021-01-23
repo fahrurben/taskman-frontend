@@ -2,8 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import reportWebVitals from './reportWebVitals'
 import './App.scss'
-import Login from './pages/Login'
-import Home from './pages/Home'
+import Routes from './routes'
 import {Provider} from 'react-redux'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import configureStore from './configureStore'
@@ -18,10 +17,7 @@ ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
             <Router>
-                <div className="container mx-auto">
-                    <Route exact path="/Home" component={Home}/>
-                    <Route exact path="/" component={Login}/>
-                </div>
+                <Routes />
             </Router>
         </Provider>
     </React.StrictMode>,

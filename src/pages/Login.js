@@ -24,10 +24,9 @@ function Login() {
     useEffect(() => {
         if (status === SUBMITTED) {
             UIkit.notification({message: "Login success", status: "success"})
-            // eslint-disable-next-line
             history.push("/home")
         }
-    }, [status]);
+    }, [status]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const emailValidation = {required: {value: true, message: "Email is required"}}
     const passwordValidation = {required: {value: true, message: "Password is required"}}
