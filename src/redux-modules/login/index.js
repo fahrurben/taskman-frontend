@@ -1,6 +1,7 @@
-import {READY, SUBMITTED, LOGIN_SUBMIT_DONE} from "../constant"
+import {READY, SUBMITTED} from "../../constant"
+import {LOGIN_SUBMIT_DONE} from "./types"
 
-function loginReducer(state = {
+function login(state = {
     status: READY,
     isLoading: false,
     response: {
@@ -26,4 +27,4 @@ function loginReducer(state = {
     }
 }
 
-export default loginReducer;
+export default login;

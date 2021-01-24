@@ -1,21 +1,22 @@
-import React, {useEffect,} from "react"
+import React, {useState, useEffect,} from "react"
 import {useSelector, useDispatch} from "react-redux"
-import {useHistory} from "react-router-dom"
+import {useHistory, Link} from "react-router-dom"
 import {useForm} from "react-hook-form"
+import classNames from "classnames"
 import _ from 'lodash'
-import {getInitialData, getData} from '../actions/ProjectActions'
-import {loginSubmit} from "../actions/LoginActions";
+import UIkit from 'uikit'
+import {getInitialData, getData} from '../../redux-modules/project-index/actions'
 
-function Project() {
+function Index() {
 
-    const {register, handleSubmit, errors, getValues} = useForm()
+    const {register, handleSubmit, errors} = useForm()
 
     const dispatch = useDispatch()
     const history = useHistory()
-    let status = useSelector(state => state.project.status)
-    let data = useSelector(state => state.project.data)
-    let page = useSelector(state => state.project.page)
-    let totalPage = useSelector(state => state.project.totalPage)
+    let isLoading = useSelector(state => state.projectIndex.isLoading)
+    let data = useSelector(state => state.projectIndex.data)
+    let page = useSelector(state => state.projectIndex.page)
+    let totalPage = useSelector(state => state.projectIndex.totalPage)
 
     useEffect(() => {
         dispatch(getInitialData())
@@ -31,10 +32,24 @@ function Project() {
 
     const arrPages = _.range(totalPage)
 
+    let tableClass = classNames(
+        "uk-table uk-table-striped uk-table-small uk-table-divider",
+        {
+            "uk-hidden": isLoading,
+        }
+    )
+
+    let spinnerClass = classNames(
+        "uk-text-center",
+        {
+            "uk-hidden": !isLoading,
+        }
+    )
+
     return (
         <div>
             <div id="form-title" className="uk-card uk-card-primary uk-card-body">
-                <p>Project <a href="#"  className="uk-icon-button" uk-icon="plus"></a></p>
+                <p>Project <Link className="uk-icon-button" uk-icon="plus" to="/project/create"></Link></p>
             </div>
             <div className="main-wrapper">
                 <form className="uk-grid-small" data-uk-grid>
@@ -47,7 +62,7 @@ function Project() {
                     </div>
                 </form>
 
-                <table className="uk-table uk-table-striped uk-table-small uk-table-divider">
+                <table className={tableClass}>
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -60,7 +75,7 @@ function Project() {
                         data &&
                         data.map((project, key) => {
                             return (
-                                <tr>
+                                <tr key={key}>
                                     <td>{project.name}</td>
                                     <td>{project.desc}</td>
                                     <td>
@@ -75,6 +90,9 @@ function Project() {
                     }
                     </tbody>
                 </table>
+                <div className={spinnerClass}>
+                    <span className="uk-margin-small-right" uk-spinner="ratio: 1.5"></span>
+                </div>
                 <ul className="uk-pagination uk-flex-center">
                     {
                         page > 1 && <li><a href="#" onClick={() => gotoPage(page - 1)}><span data-uk-pagination-previous></span></a></li>
@@ -83,7 +101,7 @@ function Project() {
                         arrPages.length > 1 &&
                         arrPages.map((val) => {
                             let page = val + 1;
-                            return <li><a href="#" onClick={() => gotoPage(page)}>{page}</a></li>
+                            return <li key={page}><a href="#" onClick={() => gotoPage(page)}>{page}</a></li>
                         })
                     }
                     {
@@ -95,4 +113,4 @@ function Project() {
     )
 }
 
-export default Project
+export default Index

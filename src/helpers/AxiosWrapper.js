@@ -10,4 +10,13 @@ function post(url, data) {
     return axios.post(url, data, config)
 }
 
-export { post }
+function get(url, data) {
+    const config = {
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem(AUTH_TOKEN_KEY)
+        }
+    }
+    return axios.get(url, config)
+}
+
+export { get, post }

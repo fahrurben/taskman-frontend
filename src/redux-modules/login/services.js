@@ -2,7 +2,8 @@ import {put} from "redux-saga/effects"
 import axios from "axios"
 
 
-import {API_URL, LOGIN_SUBMIT_START, LOGIN_SUBMIT_DONE, AUTH_TOKEN_KEY} from "../constant"
+import {API_URL, AUTH_TOKEN_KEY} from "../../constant"
+import {LOGIN_SUBMIT_START, LOGIN_SUBMIT_DONE} from "./types"
 
 function* loginSubmit(action) {
     const email = action.payload.email;

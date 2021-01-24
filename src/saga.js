@@ -2,18 +2,22 @@ import {takeLatest, all} from 'redux-saga/effects';
 
 import {
     LOGIN_SUBMIT,
-    PROJECT_PAGE_GET_INIT_DATA,
-    PROJECT_PAGE_GET_DATA
-} from './constant';
+} from './redux-modules/login/types';
+
+import {
+    GET_INIT_DATA,
+    GET_DATA
+} from './redux-modules/project-index/types';
 
 import {
     loginSubmit,
-} from './services/LoginService';
+} from './redux-modules/login/services';
 
 import {
     projectPageGetInitData,
-    projectPageGetData
-} from './services/ProjectService';
+    projectPageGetData,
+    // createProject
+} from './redux-modules/project-index/services';
 
 
 // notice how we now only export the rootSaga
@@ -21,7 +25,8 @@ import {
 export default function* rootSaga() {
     yield all([
         yield takeLatest(LOGIN_SUBMIT, loginSubmit),
-        yield takeLatest(PROJECT_PAGE_GET_INIT_DATA, projectPageGetInitData),
-        yield takeLatest(PROJECT_PAGE_GET_DATA, projectPageGetData),
+        yield takeLatest(GET_INIT_DATA, projectPageGetInitData),
+        yield takeLatest(GET_DATA, projectPageGetData),
+        // yield takeLatest(CREATE_PROJECT, createProject),
     ])
 }
