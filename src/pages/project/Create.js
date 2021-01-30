@@ -9,10 +9,9 @@ import { FAILED, SUBMITTED } from '../../constant';
 function Create() {
   const { register, handleSubmit } = useForm();
 
-  const dispatch = useDispatch();
   const history = useHistory();
+  const dispatch = useDispatch();
   const status = useSelector((state) => state.projectCreate.status);
-  const isLoading = useSelector((state) => state.projectCreate.isLoading);
   const response = useSelector((state) => state.projectCreate.response);
 
   const onFormSubmit = (data) => {
@@ -54,10 +53,11 @@ function Create() {
               <div className="uk-form-controls">
                 <input
                   ref={register()}
-className="uk-input uk-form-small"
-type="text"
+                  className="uk-input uk-form-small"
+                  type="text"
                   placeholder="Name"
-name="name"
+                  id="name"
+                  name="name"
                 />
               </div>
             </div>
@@ -67,14 +67,14 @@ name="name"
               <div className="uk-form-controls">
                 <input
                   ref={register()}
-className="uk-input uk-form-small"
-type="text"
+                  className="uk-input uk-form-small"
+                  type="text"
                   placeholder="Description"
-name="desc"
+                  id="desc"
+                  name="desc"
                 />
               </div>
             </div>
-
           </div>
 
         </fieldset>
@@ -82,7 +82,7 @@ name="desc"
       <div className="uk-text-right">
         <div>
           <Link class="uk-button uk-button-default uk-modal-close" type="button" to="/project">Cancel</Link>
-                    &nbsp;
+          &nbsp;
           <button
             onClick={handleSubmit(onFormSubmit)}
             className="uk-button uk-button-primary"

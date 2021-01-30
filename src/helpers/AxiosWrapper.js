@@ -10,7 +10,7 @@ function post(url, data) {
   return axios.post(url, data, config);
 }
 
-function get(url, data) {
+function get(url) {
   const config = {
     headers: {
       Authorization: `Bearer ${localStorage.getItem(AUTH_TOKEN_KEY)}`,

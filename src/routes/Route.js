@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/jsx-first-prop-new-line */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
@@ -36,8 +38,7 @@ export default function RouteWrapper({
      */
   // return <Route {...rest} component={Component} />;
   return (
-    <Route
-      {...rest}
+    <Route {...rest}
       render={(props) => (
         <Layout>
           <Component {...props} />

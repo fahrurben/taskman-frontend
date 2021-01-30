@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import classNames from 'classnames';
 import _ from 'lodash';
-import UIkit from 'uikit';
 import { getInitialData, getData } from '../../redux-modules/project-index/actions';
 
 function Index() {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const dispatch = useDispatch();
-  const history = useHistory();
   const isLoading = useSelector((state) => state.projectIndex.isLoading);
   const data = useSelector((state) => state.projectIndex.data);
   const page = useSelector((state) => state.projectIndex.page);
@@ -21,12 +19,12 @@ function Index() {
     dispatch(getInitialData());
   }, []);
 
-  function gotoPage(page) {
-    dispatch(getData(page, data));
+  function gotoPage(pageNumber) {
+    dispatch(getData(pageNumber, data));
   }
 
-  const onFormSearchSubmit = (data) => {
-    dispatch(getData(1, data));
+  const onFormSearchSubmit = (result) => {
+    dispatch(getData(1, result));
   };
 
   const arrPages = _.range(totalPage);
@@ -56,10 +54,17 @@ function Index() {
       <div className="main-wrapper">
         <form className="uk-grid-small" data-uk-grid>
           <div className="uk-width-1-3">
-            <input className="uk-input uk-form-small" type="text" placeholder="Name" name="name" ref={register()} />
+            <input
+              className="uk-input uk-form-small"
+              type="text"
+              placeholder="Name"
+              name="name"
+              ref={register()}
+            />
           </div>
           <div className="uk-width-1-3">
             <button
+              type="button"
               className="uk-button uk-button-primary uk-button-small"
               onClick={handleSubmit(onFormSearchSubmit)}
             >
@@ -78,45 +83,47 @@ function Index() {
           </thead>
           <tbody>
             {
-                        data
-                        && data.map((project, key) => (
-                          <tr key={key}>
-                            <td>{project.name}</td>
-                            <td>{project.desc}</td>
-                            <td>
-                              <a
-                                href="#"
-                                className="uk-icon-link uk-margin-small-right"
-                                data-uk-icon="pencil"
-                              />
-                              <a
-                                href="#"
-                                className="uk-icon-link uk-margin-small-right"
-                                data-uk-icon="trash"
-                              />
-                            </td>
-                          </tr>
-                        ))
-                    }
+            data
+            && data.map((project) => (
+              <tr key={project.id}>
+                <td>{project.name}</td>
+                <td>{project.desc}</td>
+                <td>
+                  <button
+                    type="button"
+                    className="uk-icon-link uk-margin-small-right"
+                    data-uk-icon="pencil"
+                  />
+                  <button
+                    type="button"
+                    className="uk-icon-link uk-margin-small-right"
+                    data-uk-icon="trash"
+                  />
+                </td>
+              </tr>
+            ))
+          }
           </tbody>
         </table>
         <div className={spinnerClass}>
-          <span className="uk-margin-small-right" uk-spinner="ratio: 1.5" />
+          <span className="uk-margin-small-right" data-uk-spinner="ratio: 1.5" />
         </div>
         <ul className="uk-pagination uk-flex-center">
           {
-                        page > 1 && <li><a href="#" onClick={() => gotoPage(page - 1)}><span data-uk-pagination-previous /></a></li>
-                    }
+            page > 1
+            && <li><a href="#" onClick={() => gotoPage(page - 1)}><span data-uk-pagination-previous /></a></li>
+          }
           {
-                        arrPages.length > 1
-                        && arrPages.map((val) => {
-                          const page = val + 1;
-                          return <li key={page}><a href="#" onClick={() => gotoPage(page)}>{page}</a></li>;
-                        })
-                    }
+            arrPages.length > 1
+            && arrPages.map((val) => {
+              const pageNumber = val + 1;
+              return <li key={pageNumber}><a href="#" onClick={() => gotoPage(pageNumber)}>{pageNumber}</a></li>;
+            })
+          }
           {
-                        page < totalPage && <li><a href="#" onClick={() => gotoPage(page + 1)}><span data-uk-pagination-next /></a></li>
-                    }
+            page < totalPage
+            && <li><a href="#" onClick={() => gotoPage(page + 1)}><span data-uk-pagination-next /></a></li>
+          }
         </ul>
       </div>
     </div>

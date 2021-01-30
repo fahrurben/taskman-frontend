@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import reportWebVitals from './reportWebVitals';
 import './App.scss';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
+import reportWebVitals from './reportWebVitals';
 import configureStore from './configureStore';
 import Routes from './routes';
 
@@ -21,6 +21,7 @@ ReactDOM.render(
       </Router>
     </Provider>
   </React.StrictMode>,
+  // eslint-disable-next-line no-undef
   document.getElementById('root'),
 );
 
