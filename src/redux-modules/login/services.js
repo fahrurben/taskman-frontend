@@ -2,24 +2,23 @@ import { put } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { API_URL, AUTH_TOKEN_KEY } from '../../constant';
-import { LOGIN_SUBMIT_START, LOGIN_SUBMIT_DONE } from './types';
+import { AUTHENTICATE_START, AUTHENTICATE_SUCCESS, AUTHENTICATE_FAILED } from './types';
 
-function* loginSubmit(action) {
-  const { email } = action.payload;
-  const { password } = action.payload;
+function* authenticate(action) {
+  const { email, password } = action.data;
 
   let response = null;
   try {
-    yield put({ type: LOGIN_SUBMIT_START });
+    yield put({ type: AUTHENTICATE_START });
     response = yield axios.post(`${API_URL}/login`, { email, password });
     localStorage.setItem(AUTH_TOKEN_KEY, response?.data?.token);
-    yield put({ type: LOGIN_SUBMIT_DONE, payload: { success: true, message: '' } });
+    yield put({ type: AUTHENTICATE_SUCCESS, payload: { success: true, message: '' } });
   } catch (e) {
     const errorMessage = e?.response?.data?.message;
-    yield put({ type: LOGIN_SUBMIT_DONE, payload: { success: false, message: errorMessage } });
+    yield put({ type: AUTHENTICATE_FAILED, payload: { success: false, message: errorMessage } });
   }
 }
 
 export {
-  loginSubmit,
+  authenticate,
 };

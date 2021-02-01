@@ -1,4 +1,5 @@
-import { LOGIN_SUBMIT } from './types';
+import { AUTHENTICATE, LOGIN_RESET } from './types';
 import { makeActionCreator } from '../../helpers/Common';
 
-export const loginSubmit = makeActionCreator(LOGIN_SUBMIT, 'payload');
+export const authenticate = makeActionCreator(AUTHENTICATE, 'data');
+export const reset = makeActionCreator(LOGIN_RESET);

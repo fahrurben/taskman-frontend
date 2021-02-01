@@ -1,6 +1,6 @@
 import { takeLatest, all } from 'redux-saga/effects';
 
-import { LOGIN_SUBMIT } from './redux-modules/login/types';
+import { AUTHENTICATE as LOGIN_AUTHENTICATE } from './redux-modules/login/types';
 import { GET_INIT_DATA, GET_DATA } from './redux-modules/project-index/types';
 import { CREATE_PROJECT } from './redux-modules/project-create/types';
 import {
@@ -9,7 +9,7 @@ import {
 }
   from './redux-modules/project-edit/types';
 
-import { loginSubmit } from './redux-modules/login/services';
+import { authenticate as loginAuthenticate } from './redux-modules/login/services';
 
 import { projectPageGetInitData, projectPageGetData } from './redux-modules/project-index/services';
 import { createProject } from './redux-modules/project-create/services';
@@ -22,7 +22,7 @@ import {
 // single entry point to start all Sagas at once
 export default function* rootSaga() {
   yield all([
-    yield takeLatest(LOGIN_SUBMIT, loginSubmit),
+    yield takeLatest(LOGIN_AUTHENTICATE, loginAuthenticate),
     yield takeLatest(GET_INIT_DATA, projectPageGetInitData),
     yield takeLatest(GET_DATA, projectPageGetData),
     yield takeLatest(CREATE_PROJECT, createProject),

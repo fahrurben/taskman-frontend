@@ -1,5 +1,5 @@
 import { READY, SUBMITTED } from '../../constant';
-import { LOGIN_SUBMIT_DONE } from './types';
+import { AUTHENTICATE_SUCCESS, AUTHENTICATE_FAILED, LOGIN_RESET } from './types';
 
 function login(state = {
   status: READY,
@@ -12,14 +12,32 @@ function login(state = {
   let status = null;
 
   switch (action.type) {
-    case LOGIN_SUBMIT_DONE:
+    case AUTHENTICATE_SUCCESS:
+      return {
+        ...state,
+        status: SUBMITTED,
+        response: {
+          success: true,
+          message: action.payload.message,
+        },
+      };
+    case AUTHENTICATE_FAILED:
       status = action.payload.success ? SUBMITTED : state.status;
       return {
         ...state,
-        status,
         response: {
-          success: action.payload.success,
+          success: false,
           message: action.payload.message,
+        },
+      };
+    case LOGIN_RESET:
+      return {
+        ...state,
+        status: READY,
+        isLoading: false,
+        response: {
+          status: null,
+          message: '',
         },
       };
     default:

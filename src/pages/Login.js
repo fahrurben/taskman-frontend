@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import UIkit from 'uikit';
-import { loginSubmit } from '../redux-modules/login/actions';
+import { authenticate, reset } from '../redux-modules/login/actions';
 import { SUBMITTED } from '../constant';
 
 function Login() {
@@ -15,7 +15,7 @@ function Login() {
   const response = useSelector((state) => state.login.response);
 
   const onFormSubmit = (data) => {
-    dispatch(loginSubmit(data));
+    dispatch(authenticate(data));
   };
 
   useEffect(() => {
@@ -24,6 +24,7 @@ function Login() {
   useEffect(() => {
     if (status === SUBMITTED) {
       UIkit.notification({ message: 'Login success', status: 'success' });
+      dispatch(reset());
       history.push('/home');
     }
   }, [status]);
