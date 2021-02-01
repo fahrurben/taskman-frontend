@@ -6,7 +6,7 @@ import {
 
 import {
   CREATE_PROJECT_START, CREATE_PROJECT_SUCCESS, CREATE_PROJECT_FAILED,
-} from '../types';
+} from './types';
 
 function* createProject(action) {
   const { data } = action;

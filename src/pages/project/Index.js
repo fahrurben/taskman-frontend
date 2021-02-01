@@ -85,12 +85,12 @@ function Index() {
             {
             data
             && data.map((project) => (
-              <tr key={project.id}>
+              <tr key={project._id}>
                 <td>{project.name}</td>
                 <td>{project.desc}</td>
                 <td>
-                  <button
-                    type="button"
+                  <Link
+                    to={`/project/edit/${project._id}`}
                     className="uk-icon-link uk-margin-small-right"
                     data-uk-icon="pencil"
                   />
