@@ -9,7 +9,7 @@ import {
 import { CREATE_PROJECT as PROJECT_ADD_CREATE_PROJECT } from './redux-modules/project-add/types';
 import {
   FETCH_INITIAL_DATA as PROJECT_EDIT_FETCH_INITIAL_DATA,
-  UPDATE_PROJECT,
+  UPDATE_PROJECT as PROJECT_EDIT_UPDATE_PROJECT,
 }
   from './redux-modules/project-edit/types';
 
@@ -22,7 +22,7 @@ import {
 import { createProject as projectAddCreateProject } from './redux-modules/project-add/services';
 import {
   fetchInitialData as projectEditFetchInitialData,
-  updateProject,
+  updateProject as projectEditUpdateProject,
 } from './redux-modules/project-edit/services';
 
 // notice how we now only export the rootSaga
@@ -34,6 +34,6 @@ export default function* rootSaga() {
     yield takeLatest(PROJECT_SEARCH_FETCH_DATA, projectSearchFetchData),
     yield takeLatest(PROJECT_ADD_CREATE_PROJECT, projectAddCreateProject),
     yield takeLatest(PROJECT_EDIT_FETCH_INITIAL_DATA, projectEditFetchInitialData),
-    yield takeLatest(UPDATE_PROJECT, updateProject),
+    yield takeLatest(PROJECT_EDIT_UPDATE_PROJECT, projectEditUpdateProject),
   ]);
 }

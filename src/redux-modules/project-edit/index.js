@@ -5,7 +5,7 @@ import {
 import {
   FETCH_INITIAL_DATA_START, FETCH_INITIAL_DATA_SUCCESS, FETCH_INITIAL_DATA_FAILED,
   UPDATE_PROJECT_START, UPDATE_PROJECT_SUCCESS, UPDATE_PROJECT_FAILED,
-  EDIT_PROJECT_RESET,
+  PROJECT_EDIT_RESET,
 } from './types';
 
 function reducer(state = {
@@ -21,7 +21,7 @@ function reducer(state = {
     case FETCH_INITIAL_DATA_START:
     case UPDATE_PROJECT_START:
       return { ...state, isLoading: true };
-    case EDIT_PROJECT_RESET:
+    case PROJECT_EDIT_RESET:
       return {
         ...state,
         isLoading: false,

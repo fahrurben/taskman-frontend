@@ -1,4 +1,4 @@
-export const EDIT_PROJECT_RESET = '@@project/EDIT_PROJECT_RESET';
+export const PROJECT_EDIT_RESET = '@@project/PROJECT_EDIT_RESET';
 export const UPDATE_PROJECT = '@@project/UPDATE_PROJECT';
 export const UPDATE_PROJECT_START = '@@project/UPDATE_PROJECT_START';
 export const UPDATE_PROJECT_SUCCESS = '@@project/UPDATE_PROJECT_SUCCESS';
