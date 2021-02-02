@@ -1,9 +1,9 @@
 import {
-  GET_INIT_DATA_SUCCESS,
-  GET_DATA_SUCCESS,
-  GET_INIT_DATA_START,
-  GET_DATA_START,
-  GET_INIT_DATA_FAILED, GET_DATA_FAILED,
+  FETCH_INIT_DATA_SUCCESS,
+  FETCH_DATA_SUCCESS,
+  FETCH_INIT_DATA_START,
+  FETCH_DATA_START,
+  FETCH_INIT_DATA_FAILED, FETCH_DATA_FAILED,
 } from './types';
 
 function reducer(state = {
@@ -13,11 +13,11 @@ function reducer(state = {
   totalPage: 1,
 }, action) {
   switch (action.type) {
-    case GET_INIT_DATA_START:
-    case GET_DATA_START:
+    case FETCH_INIT_DATA_START:
+    case FETCH_DATA_START:
       return { ...state, isLoading: true };
-    case GET_INIT_DATA_SUCCESS:
-    case GET_DATA_SUCCESS:
+    case FETCH_INIT_DATA_SUCCESS:
+    case FETCH_DATA_SUCCESS:
       return {
         ...state,
         isLoading: false,
@@ -25,8 +25,8 @@ function reducer(state = {
         page: action.payload.page,
         totalPage: action.payload.totalPage,
       };
-    case GET_INIT_DATA_FAILED:
-    case GET_DATA_FAILED:
+    case FETCH_INIT_DATA_FAILED:
+    case FETCH_DATA_FAILED:
       return { ...state, isLoading: false };
     default:
       return { ...state };

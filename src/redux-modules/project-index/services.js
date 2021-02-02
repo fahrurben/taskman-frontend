@@ -5,22 +5,22 @@ import {
 } from '../../constant';
 
 import {
-  GET_INIT_DATA_START,
-  GET_INIT_DATA_SUCCESS,
-  GET_INIT_DATA_FAILED,
-  GET_DATA_START,
-  GET_DATA_SUCCESS,
-  GET_DATA_FAILED,
+  FETCH_INIT_DATA_START,
+  FETCH_INIT_DATA_SUCCESS,
+  FETCH_INIT_DATA_FAILED,
+  FETCH_DATA_START,
+  FETCH_DATA_SUCCESS,
+  FETCH_DATA_FAILED,
 } from './types';
 
-function* projectPageGetInitData() {
+function* fetchInitialData() {
   const page = 1;
   let response = null;
   try {
-    yield put({ type: GET_INIT_DATA_START });
+    yield put({ type: FETCH_INIT_DATA_START });
     response = yield post(`${API_URL}/project/search/${page}`, { name: '' });
     yield put({
-      type: GET_INIT_DATA_SUCCESS,
+      type: FETCH_INIT_DATA_SUCCESS,
       payload: {
         page,
         data: response.data.data,
@@ -29,19 +29,19 @@ function* projectPageGetInitData() {
     });
   } catch (e) {
     const errorMessage = e?.response?.data?.message;
-    yield put({ type: GET_INIT_DATA_FAILED, payload: { message: errorMessage } });
+    yield put({ type: FETCH_INIT_DATA_FAILED, payload: { message: errorMessage } });
   }
 }
 
-function* projectPageGetData(action) {
+function* fetchData(action) {
   const { page } = action;
   const { filter } = action;
   let response = null;
   try {
-    yield put({ type: GET_DATA_START });
+    yield put({ type: FETCH_DATA_START });
     response = yield post(`${API_URL}/project/search/${page}`, filter);
     yield put({
-      type: GET_DATA_SUCCESS,
+      type: FETCH_DATA_SUCCESS,
       payload: {
         page,
         data: response.data.data,
@@ -50,11 +50,11 @@ function* projectPageGetData(action) {
     });
   } catch (e) {
     const errorMessage = e?.response?.data?.message;
-    yield put({ type: GET_DATA_FAILED, payload: { message: errorMessage } });
+    yield put({ type: FETCH_DATA_FAILED, payload: { message: errorMessage } });
   }
 }
 
 export {
-  projectPageGetInitData,
-  projectPageGetData,
+  fetchInitialData,
+  fetchData,
 };

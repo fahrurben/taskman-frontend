@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import classNames from 'classnames';
 import _ from 'lodash';
-import { getInitialData, getData } from '../../redux-modules/project-index/actions';
+import { fetchInitialData, fetchData } from '../../redux-modules/project-index/actions';
 
 function Index() {
   const { register, handleSubmit } = useForm();
@@ -16,15 +16,15 @@ function Index() {
   const totalPage = useSelector((state) => state.projectIndex.totalPage);
 
   useEffect(() => {
-    dispatch(getInitialData());
+    dispatch(fetchInitialData());
   }, []);
 
   function gotoPage(pageNumber) {
-    dispatch(getData(pageNumber, data));
+    dispatch(fetchData(pageNumber, data));
   }
 
   const onFormSearchSubmit = (result) => {
-    dispatch(getData(1, result));
+    dispatch(fetchData(1, result));
   };
 
   const arrPages = _.range(totalPage);
