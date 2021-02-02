@@ -1,7 +1,7 @@
 import {
-  CREATE_PROJECT, CREATE_PROJECT_RESET,
+  CREATE_PROJECT, PROJECT_ADD_RESET,
 } from './types';
 import { makeActionCreator } from '../../helpers/Common';
 
 export const createProject = makeActionCreator(CREATE_PROJECT, 'data');
-export const resetCreateProject = makeActionCreator(CREATE_PROJECT_RESET);
+export const resetProjectAdd = makeActionCreator(PROJECT_ADD_RESET);

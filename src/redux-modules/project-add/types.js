@@ -2,4 +2,4 @@ export const CREATE_PROJECT = '@@project/CREATE_PROJECT';
 export const CREATE_PROJECT_START = '@@project/CREATE_PROJECT_START';
 export const CREATE_PROJECT_SUCCESS = '@@project/CREATE_PROJECT_SUCCESS';
 export const CREATE_PROJECT_FAILED = '@@project/CREATE_PROJECT_FAILED';
-export const CREATE_PROJECT_RESET = '@@project/CREATE_PROJECT_RESET';
+export const PROJECT_ADD_RESET = '@@project/PROJECT_ADD_RESET';

@@ -5,7 +5,7 @@ import Route from './Route';
 import Login from '../pages/Login';
 import Home from '../pages/Home';
 import ProjectIndex from '../pages/project/Index';
-import ProjectCreate from '../pages/project/Create';
+import ProjectAdd from '../pages/project/Add';
 import ProjectEdit from '../pages/project/Edit';
 
 export default function Routes() {
@@ -14,7 +14,7 @@ export default function Routes() {
       <Route path="/" exact component={Login} />
 
       <Route path="/home" component={Home} isPrivate />
-      <Route path="/project/create" component={ProjectCreate} isPrivate />
+      <Route path="/project/add" component={ProjectAdd} isPrivate />
       <Route path="/project/edit/:id" component={ProjectEdit} isPrivate />
       <Route path="/project" component={ProjectIndex} isPrivate />
 

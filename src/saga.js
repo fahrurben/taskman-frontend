@@ -6,7 +6,7 @@ import {
   FETCH_DATA as PROJECT_SEARCH_FETCH_DATA,
 }
   from './redux-modules/project-index/types';
-import { CREATE_PROJECT } from './redux-modules/project-create/types';
+import { CREATE_PROJECT as PROJECT_ADD_CREATE_PROJECT } from './redux-modules/project-add/types';
 import {
   FETCH_INITIAL_DATA as PROJECT_EDIT_FETCH_INITIAL_DATA,
   UPDATE_PROJECT,
@@ -19,7 +19,7 @@ import {
   fetchInitialData as projectSearchFetchInitData,
   fetchData as projectSearchFetchData,
 } from './redux-modules/project-index/services';
-import { createProject } from './redux-modules/project-create/services';
+import { createProject as projectAddCreateProject } from './redux-modules/project-add/services';
 import {
   fetchInitialData as projectEditFetchInitialData,
   updateProject,
@@ -32,7 +32,7 @@ export default function* rootSaga() {
     yield takeLatest(LOGIN_AUTHENTICATE, loginAuthenticate),
     yield takeLatest(PROJECT_SEARCH_FETCH_INIT_DATA, projectSearchFetchInitData),
     yield takeLatest(PROJECT_SEARCH_FETCH_DATA, projectSearchFetchData),
-    yield takeLatest(CREATE_PROJECT, createProject),
+    yield takeLatest(PROJECT_ADD_CREATE_PROJECT, projectAddCreateProject),
     yield takeLatest(PROJECT_EDIT_FETCH_INITIAL_DATA, projectEditFetchInitialData),
     yield takeLatest(UPDATE_PROJECT, updateProject),
   ]);

@@ -8,7 +8,7 @@ import {
   CREATE_PROJECT_START,
   CREATE_PROJECT_SUCCESS,
   CREATE_PROJECT_FAILED,
-  CREATE_PROJECT_RESET,
+  PROJECT_ADD_RESET,
 } from './types';
 
 function reducer(state = {
@@ -41,7 +41,7 @@ function reducer(state = {
           message: action.payload.message,
         },
       };
-    case CREATE_PROJECT_RESET:
+    case PROJECT_ADD_RESET:
       return {
         ...state,
         status: READY,

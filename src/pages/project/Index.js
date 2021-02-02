@@ -48,7 +48,7 @@ function Index() {
       <div id="form-title" className="uk-card uk-card-primary uk-card-body">
         <p>
           Project
-          <Link className="uk-icon-button" uk-icon="plus" to="/project/create" />
+          <Link className="uk-icon-button" uk-icon="plus" to="/project/add" />
         </p>
       </div>
       <div className="main-wrapper">

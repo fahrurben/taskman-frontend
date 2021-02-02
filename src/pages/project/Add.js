@@ -4,10 +4,10 @@ import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import UIkit from 'uikit';
 import TextInput from '../../components/form/TextInput';
-import { createProject, resetCreateProject } from '../../redux-modules/project-create/actions';
+import { createProject, resetProjectAdd } from '../../redux-modules/project-add/actions';
 import { FAILED, SUBMITTED } from '../../constant';
 
-function Create() {
+function Add() {
   const { register, handleSubmit } = useForm();
 
   const history = useHistory();
@@ -27,14 +27,14 @@ function Create() {
 
   useEffect(() => {
     if (status === SUBMITTED) {
-      UIkit.notification({ message: 'Create Project Success', status: 'success' });
-      dispatch(resetCreateProject());
+      UIkit.notification({ message: 'Add Project Success', status: 'success' });
+      dispatch(resetProjectAdd());
       history.push('/project');
     }
   }, [status]);
 
   useEffect(() => {
-    dispatch(resetCreateProject());
+    dispatch(resetProjectAdd());
   }, []);
 
   return (
@@ -42,7 +42,7 @@ function Create() {
       <form className="uk-form-horizontal">
         <fieldset className="uk-fieldset">
 
-          <legend className="uk-legend">Create Task</legend>
+          <legend className="uk-legend">Create Project</legend>
           <div>
             <TextInput id="name" name="name" label="Name" inputRef={register} />
             <TextInput id="desc" name="desc" label="Description" inputRef={register} />
@@ -66,4 +66,4 @@ function Create() {
   );
 }
 
-export default Create;
+export default Add;
