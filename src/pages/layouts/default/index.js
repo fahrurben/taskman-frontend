@@ -27,7 +27,7 @@ export default function DefaultLayout({ children }) {
           </li>
           <li className="">
             <a
-              href="#"
+              href="/project"
             >
               Project
             </a>

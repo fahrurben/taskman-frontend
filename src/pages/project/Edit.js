@@ -6,6 +6,7 @@ import UIkit from 'uikit';
 import TextInput from '../../components/form/TextInput';
 import { fetchInitialData, resetEditProject, updateProject } from '../../redux-modules/project-edit/actions';
 import { SUBMITTED } from '../../constant';
+import FormProject from '../../components/project/Form';
 
 function Edit() {
   const { register, handleSubmit, setValue } = useForm();
@@ -43,29 +44,12 @@ function Edit() {
 
   return (
     <div className="main-wrapper">
-      <form className="uk-form-horizontal">
-        <fieldset className="uk-fieldset">
-
-          <legend className="uk-legend">Edit Task</legend>
-          <div>
-            <TextInput id="name" name="name" label="Name" inputRef={register} />
-            <TextInput id="desc" name="desc" label="Description" inputRef={register} />
-          </div>
-        </fieldset>
-      </form>
-      <div className="uk-text-right">
-        <div>
-          <Link class="uk-button uk-button-default uk-modal-close" type="button" to="/project">Cancel</Link>
-          &nbsp;
-          <button
-            onClick={handleSubmit(onFormSubmit)}
-            className="uk-button uk-button-primary"
-            type="button"
-          >
-            Save
-          </button>
-        </div>
-      </div>
+      <FormProject
+        title="Update Project"
+        register={register}
+        onFormSubmit={onFormSubmit}
+        handleSubmit={handleSubmit}
+      />
     </div>
   );
 }

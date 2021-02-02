@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import UIkit from 'uikit';
 import TextInput from '../../components/form/TextInput';
+import FormProject from '../../components/project/Form';
 import { createProject, resetProjectAdd } from '../../redux-modules/project-add/actions';
 import { FAILED, SUBMITTED } from '../../constant';
 
@@ -39,29 +40,12 @@ function Add() {
 
   return (
     <div className="main-wrapper">
-      <form className="uk-form-horizontal">
-        <fieldset className="uk-fieldset">
-
-          <legend className="uk-legend">Create Project</legend>
-          <div>
-            <TextInput id="name" name="name" label="Name" inputRef={register} />
-            <TextInput id="desc" name="desc" label="Description" inputRef={register} />
-          </div>
-        </fieldset>
-      </form>
-      <div className="uk-text-right">
-        <div>
-          <Link class="uk-button uk-button-default uk-modal-close" type="button" to="/project">Cancel</Link>
-          &nbsp;
-          <button
-            onClick={handleSubmit(onFormSubmit)}
-            className="uk-button uk-button-primary"
-            type="button"
-          >
-            Save
-          </button>
-        </div>
-      </div>
+      <FormProject
+        title="Create Project"
+        register={register}
+        onFormSubmit={onFormSubmit}
+        handleSubmit={handleSubmit}
+      />
     </div>
   );
 }
