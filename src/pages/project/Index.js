@@ -3,8 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import classNames from 'classnames';
+import UIkit from 'uikit';
 import _ from 'lodash';
-import { fetchInitialData, fetchData } from '../../redux-modules/project-index/actions';
+import { fetchInitialData, fetchData, deleteProject } from '../../redux-modules/project-index/actions';
+import Button from '../../components/ui/Button';
 
 function Index() {
   const { register, handleSubmit } = useForm();
@@ -21,6 +23,13 @@ function Index() {
 
   function gotoPage(pageNumber) {
     dispatch(fetchData(pageNumber, data));
+  }
+
+  function showDeleteModal(id, name) {
+    UIkit.modal.confirm(`Are you sure to delete project: ${name}`).then(
+      () => dispatch(deleteProject(id)),
+      () => {},
+    );
   }
 
   const onFormSearchSubmit = (result) => {
@@ -63,13 +72,7 @@ function Index() {
             />
           </div>
           <div className="uk-width-1-3">
-            <button
-              type="button"
-              className="uk-button uk-button-primary uk-button-small"
-              onClick={handleSubmit(onFormSearchSubmit)}
-            >
-              Search
-            </button>
+            <Button onClick={handleSubmit(onFormSearchSubmit)}>Search</Button>
           </div>
         </form>
 
@@ -95,6 +98,7 @@ function Index() {
                     data-uk-icon="pencil"
                   />
                   <button
+                    onClick={() => showDeleteModal(project._id, project.name)}
                     type="button"
                     className="uk-icon-link uk-margin-small-right"
                     data-uk-icon="trash"

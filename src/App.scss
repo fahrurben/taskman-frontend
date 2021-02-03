@@ -96,3 +96,7 @@ body {
         width: 500px;
     }
 }
+
+.button-primary {
+    @apply uk-button uk-button-primary;
+}
