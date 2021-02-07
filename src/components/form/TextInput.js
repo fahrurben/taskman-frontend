@@ -6,12 +6,17 @@ function TextInput({
 }) {
   return (
     <div className="uk-margin">
-      <label className="uk-form-label" htmlFor={id}>
-        {label}
-        {
-          required && <span className="uk-text-danger">*</span>
-        }
-      </label>
+      {
+        label
+        && (
+          <label className="uk-form-label" htmlFor={id}>
+            {label}
+            {
+              required && <span className="uk-text-danger">*</span>
+            }
+          </label>
+        )
+      }
       <div className="uk-form-controls">
         <input
           className="uk-input uk-form-small"
@@ -30,8 +35,13 @@ TextInput.propTypes = {
   inputRef: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  required: PropTypes.bool.isRequired,
+  label: PropTypes.string,
+  required: PropTypes.bool,
+};
+
+TextInput.defaultProps = {
+  required: false,
+  label: null,
 };
 
 export default TextInput;

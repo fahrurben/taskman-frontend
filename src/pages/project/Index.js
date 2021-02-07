@@ -7,6 +7,8 @@ import UIkit from 'uikit';
 import _ from 'lodash';
 import { fetchInitialData, fetchData, deleteProject } from '../../redux-modules/project-index/actions';
 import Button from '../../components/ui/Button';
+import TextInput from '../../components/form/TextInput';
+import PagingNav from '../../components/ui/PagingNav';
 
 function Index() {
   const { register, handleSubmit } = useForm();
@@ -63,13 +65,7 @@ function Index() {
       <div className="main-wrapper">
         <form className="uk-grid-small" data-uk-grid>
           <div className="uk-width-1-3">
-            <input
-              className="uk-input uk-form-small"
-              type="text"
-              placeholder="Name"
-              name="name"
-              ref={register()}
-            />
+            <TextInput id="name" name="name" inputRef={register} />
           </div>
           <div className="uk-width-1-3">
             <Button onClick={handleSubmit(onFormSearchSubmit)}>Search</Button>
@@ -112,23 +108,7 @@ function Index() {
         <div className={spinnerClass}>
           <span className="uk-margin-small-right" data-uk-spinner="ratio: 1.5" />
         </div>
-        <ul className="uk-pagination uk-flex-center">
-          {
-            page > 1
-            && <li><a href="#" onClick={() => gotoPage(page - 1)}><span data-uk-pagination-previous /></a></li>
-          }
-          {
-            arrPages.length > 1
-            && arrPages.map((val) => {
-              const pageNumber = val + 1;
-              return <li key={pageNumber}><a href="#" onClick={() => gotoPage(pageNumber)}>{pageNumber}</a></li>;
-            })
-          }
-          {
-            page < totalPage
-            && <li><a href="#" onClick={() => gotoPage(page + 1)}><span data-uk-pagination-next /></a></li>
-          }
-        </ul>
+        <PagingNav gotoPage={gotoPage} arrPages={arrPages} page={page} totalPage={totalPage} />
       </div>
     </div>
   );
