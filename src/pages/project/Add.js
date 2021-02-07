@@ -9,7 +9,7 @@ import { createProject, resetProjectAdd } from '../../redux-modules/project-add/
 import { FAILED, SUBMITTED } from '../../constant';
 
 function Add() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -48,6 +48,7 @@ function Add() {
       <FormProject
         title="Create Project"
         register={register}
+        errors={errors}
         onFormSubmit={onFormSubmit}
         handleSubmit={handleSubmit}
       />

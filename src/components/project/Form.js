@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import TextInput from '../form/TextInput';
 
 function Form({
-  title, register, handleSubmit, onFormSubmit,
+  title, register, errors, handleSubmit, onFormSubmit,
 }) {
   return (
     <>
@@ -12,8 +12,15 @@ function Form({
         <fieldset className="uk-fieldset">
           <legend className="uk-legend">{title}</legend>
           <div>
-            <TextInput id="name" name="name" label="Name" inputRef={register} />
-            <TextInput id="desc" name="desc" label="Description" inputRef={register} />
+            <TextInput
+              id="name"
+              name="name"
+              label="Name"
+              required="true"
+              inputRef={register({ required: { value: true, message: 'Name is required' } })}
+              error={errors.name}
+            />
+            <TextInput id="desc" name="desc" label="Description" inputRef={register({})} />
           </div>
         </fieldset>
       </form>
@@ -37,6 +44,7 @@ function Form({
 Form.propTypes = {
   title: PropTypes.string.isRequired,
   register: PropTypes.func.isRequired,
+  errors: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   onFormSubmit: PropTypes.func.isRequired,
 };
