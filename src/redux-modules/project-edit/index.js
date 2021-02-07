@@ -20,7 +20,14 @@ function reducer(state = {
   switch (action.type) {
     case FETCH_INITIAL_DATA_START:
     case UPDATE_PROJECT_START:
-      return { ...state, isLoading: true };
+      return {
+        ...state,
+        response: {
+          status: null,
+          message: '',
+        },
+        isLoading: true,
+      };
     case PROJECT_EDIT_RESET:
       return {
         ...state,

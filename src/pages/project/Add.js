@@ -36,6 +36,11 @@ function Add() {
 
   useEffect(() => {
     dispatch(resetProjectAdd());
+
+    // Component will unmount
+    return () => {
+      dispatch(resetProjectAdd());
+    };
   }, []);
 
   return (

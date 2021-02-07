@@ -21,7 +21,14 @@ function reducer(state = {
 }, action) {
   switch (action.type) {
     case CREATE_PROJECT_START:
-      return { ...state, isLoading: true };
+      return {
+        ...state,
+        response: {
+          status: null,
+          message: '',
+        },
+        isLoading: true,
+      };
     case CREATE_PROJECT_SUCCESS:
       return {
         ...state,

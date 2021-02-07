@@ -7,6 +7,7 @@ import TextInput from '../../components/form/TextInput';
 import { fetchInitialData, resetEditProject, updateProject } from '../../redux-modules/project-edit/actions';
 import { SUBMITTED } from '../../constant';
 import FormProject from '../../components/project/Form';
+import { resetProjectAdd } from '../../redux-modules/project-add/actions';
 
 function Edit() {
   const { register, handleSubmit, setValue } = useForm();
@@ -25,6 +26,11 @@ function Edit() {
   useEffect(() => {
     dispatch(resetEditProject());
     dispatch(fetchInitialData(id));
+
+    // Component will unmount
+    return () => {
+      dispatch(resetEditProject());
+    };
   }, []);
 
   useEffect(() => {
