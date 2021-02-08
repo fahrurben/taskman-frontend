@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { AUTH_TOKEN_KEY } from '../../../constant';
 
 export default function DefaultLayout({ children }) {
   const history = useHistory();
+  const location = useLocation();
+  console.log(location);
 
   const logoutClicked = () => {
     localStorage.removeItem(AUTH_TOKEN_KEY);
@@ -18,14 +20,14 @@ export default function DefaultLayout({ children }) {
           Taskman
         </div>
         <ul className="uk-nav-default uk-nav-parent-icon" data-uk-nav>
-          <li className="">
+          <li className={location.pathname.startsWith('/task') ? 'uk-active' : ''}>
             <a
-              href="#"
+              href="/task"
             >
               Task
             </a>
           </li>
-          <li className="">
+          <li className={location.pathname.startsWith('/project') ? 'uk-active' : ''}>
             <a
               href="/project"
             >

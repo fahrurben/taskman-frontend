@@ -65,7 +65,7 @@ function Index() {
       <div className="main-wrapper">
         <form className="uk-grid-small" data-uk-grid>
           <div className="uk-width-1-3">
-            <TextInput id="name" name="name" inputRef={register} />
+            <TextInput id="name" name="name" placeholder="Name" inputRef={register} />
           </div>
           <div className="uk-width-1-3">
             <Button onClick={handleSubmit(onFormSearchSubmit)}>Search</Button>

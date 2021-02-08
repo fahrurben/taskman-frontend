@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function Button({ type, onClick, children }) {
   return (
     <button
-      onClick={() => onClick}
+      onClick={onClick}
       className="uk-button uk-button-primary uk-button-small"
       type="button"
     >

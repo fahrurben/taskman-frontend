@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function TextInput({
-  inputRef, id, name, label, required, error,
+  inputRef, id, name, label, required, error, placeholder,
 }) {
   return (
     <div className="uk-margin uk-clearfix">
@@ -21,7 +21,7 @@ function TextInput({
         <input
           className="uk-input uk-form-small"
           type="text"
-          placeholder={label}
+          placeholder={placeholder}
           name={name}
           id={id}
           ref={inputRef}
@@ -39,6 +39,7 @@ TextInput.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   label: PropTypes.string,
+  placeholder: PropTypes.string,
   required: PropTypes.bool,
   error: PropTypes.string,
 };
@@ -46,6 +47,7 @@ TextInput.propTypes = {
 TextInput.defaultProps = {
   required: false,
   label: null,
+  placeholder: '',
   error: '',
 };
 

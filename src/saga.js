@@ -7,6 +7,14 @@ import {
   DELETE_PROJECT as PROJECT_SEARCH_DELETE_PROJECT,
 }
   from './redux-modules/project-index/types';
+
+import {
+  FETCH_INIT_DATA as TASK_SEARCH_FETCH_INIT_DATA,
+  FETCH_DATA as TASK_SEARCH_FETCH_DATA,
+  DELETE_TASK as TASK_SEARCH_DELETE_TASK,
+}
+  from './redux-modules/task-index/types';
+
 import { CREATE_PROJECT as PROJECT_ADD_CREATE_PROJECT } from './redux-modules/project-add/types';
 import {
   FETCH_INITIAL_DATA as PROJECT_EDIT_FETCH_INITIAL_DATA,
@@ -21,6 +29,13 @@ import {
   fetchData as projectSearchFetchData,
   deleteProject as projectSearchDeleteProject,
 } from './redux-modules/project-index/services';
+
+import {
+  fetchInitialData as taskSearchFetchInitData,
+  fetchData as taskSearchFetchData,
+  deleteTask as taskSearchDeleteTask,
+} from './redux-modules/task-index/services';
+
 import { createProject as projectAddCreateProject } from './redux-modules/project-add/services';
 import {
   fetchInitialData as projectEditFetchInitialData,
@@ -33,8 +48,11 @@ export default function* rootSaga() {
   yield all([
     yield takeLatest(LOGIN_AUTHENTICATE, loginAuthenticate),
     yield takeLatest(PROJECT_SEARCH_FETCH_INIT_DATA, projectSearchFetchInitData),
+    yield takeLatest(TASK_SEARCH_FETCH_INIT_DATA, taskSearchFetchInitData),
     yield takeLatest(PROJECT_SEARCH_FETCH_DATA, projectSearchFetchData),
+    yield takeLatest(TASK_SEARCH_FETCH_DATA, taskSearchFetchData),
     yield takeLatest(PROJECT_SEARCH_DELETE_PROJECT, projectSearchDeleteProject),
+    yield takeLatest(TASK_SEARCH_DELETE_TASK, taskSearchDeleteTask),
     yield takeLatest(PROJECT_ADD_CREATE_PROJECT, projectAddCreateProject),
     yield takeLatest(PROJECT_EDIT_FETCH_INITIAL_DATA, projectEditFetchInitialData),
     yield takeLatest(PROJECT_EDIT_UPDATE_PROJECT, projectEditUpdateProject),

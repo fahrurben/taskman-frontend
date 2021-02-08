@@ -7,6 +7,7 @@ import Home from '../pages/Home';
 import ProjectIndex from '../pages/project/Index';
 import ProjectAdd from '../pages/project/Add';
 import ProjectEdit from '../pages/project/Edit';
+import TaskIndex from '../pages/task/Index';
 
 export default function Routes() {
   return (
@@ -17,6 +18,8 @@ export default function Routes() {
       <Route path="/project/add" component={ProjectAdd} isPrivate />
       <Route path="/project/edit/:id" component={ProjectEdit} isPrivate />
       <Route path="/project" component={ProjectIndex} isPrivate />
+
+      <Route path="/task" component={TaskIndex} isPrivate />
 
       {/* redirect user to SignIn page if route does not exist and user is not authenticated */}
       <Route component={Login} />

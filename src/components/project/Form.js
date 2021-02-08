@@ -18,7 +18,7 @@ function Form({
               label="Name"
               required="true"
               inputRef={register({ required: { value: true, message: 'Name is required' } })}
-              error={errors.name}
+              error={errors?.name}
             />
             <TextInput id="desc" name="desc" label="Description" inputRef={register({})} />
           </div>
