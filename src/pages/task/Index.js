@@ -110,6 +110,7 @@ function Index() {
         <table className={tableClass}>
           <thead>
             <tr>
+              <th>No</th>
               <th>Title</th>
               <th>Project</th>
               <th>Priority</th>
@@ -123,6 +124,7 @@ function Index() {
             data
             && data.map((task) => (
               <tr key={task._id}>
+                <td>{task.no}</td>
                 <td>{task.title}</td>
                 <td>{task.project?.name}</td>
                 <td>{PRIORITY_VALUES?.[task.priority]}</td>

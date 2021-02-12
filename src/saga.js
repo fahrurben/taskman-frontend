@@ -17,6 +17,11 @@ import {
 
 import { CREATE_PROJECT as PROJECT_ADD_CREATE_PROJECT } from './redux-modules/project-add/types';
 import {
+  FETCH_INITIAL_DATA as TASK_ADD_FETCH_INITIAL_DATA,
+  CREATE_TASK as TASK_ADD_CREATE_TASK,
+} from './redux-modules/task-add/types';
+
+import {
   FETCH_INITIAL_DATA as PROJECT_EDIT_FETCH_INITIAL_DATA,
   UPDATE_PROJECT as PROJECT_EDIT_UPDATE_PROJECT,
 }
@@ -38,6 +43,11 @@ import {
 
 import { createProject as projectAddCreateProject } from './redux-modules/project-add/services';
 import {
+  fetchInitialData as taskAddFetchInitialData,
+  createTask as taskAddCreateTask,
+} from './redux-modules/task-add/services';
+
+import {
   fetchInitialData as projectEditFetchInitialData,
   updateProject as projectEditUpdateProject,
 } from './redux-modules/project-edit/services';
@@ -54,6 +64,8 @@ export default function* rootSaga() {
     yield takeLatest(PROJECT_SEARCH_DELETE_PROJECT, projectSearchDeleteProject),
     yield takeLatest(TASK_SEARCH_DELETE_TASK, taskSearchDeleteTask),
     yield takeLatest(PROJECT_ADD_CREATE_PROJECT, projectAddCreateProject),
+    yield takeLatest(TASK_ADD_FETCH_INITIAL_DATA, taskAddFetchInitialData),
+    yield takeLatest(TASK_ADD_CREATE_TASK, taskAddCreateTask),
     yield takeLatest(PROJECT_EDIT_FETCH_INITIAL_DATA, projectEditFetchInitialData),
     yield takeLatest(PROJECT_EDIT_UPDATE_PROJECT, projectEditUpdateProject),
   ]);
