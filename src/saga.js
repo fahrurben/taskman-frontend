@@ -27,6 +27,12 @@ import {
 }
   from './redux-modules/project-edit/types';
 
+import {
+  FETCH_INITIAL_DATA as TASK_EDIT_FETCH_INITIAL_DATA,
+  UPDATE_TASK as TASK_EDIT_UPDATE_TASK,
+}
+  from './redux-modules/task-edit/types';
+
 import { authenticate as loginAuthenticate } from './redux-modules/login/services';
 
 import {
@@ -52,6 +58,11 @@ import {
   updateProject as projectEditUpdateProject,
 } from './redux-modules/project-edit/services';
 
+import {
+  fetchInitialData as taskEditFetchInitialData,
+  updateTask as taskEditUpdateTask,
+} from './redux-modules/task-edit/services';
+
 // notice how we now only export the rootSaga
 // single entry point to start all Sagas at once
 export default function* rootSaga() {
@@ -68,5 +79,7 @@ export default function* rootSaga() {
     yield takeLatest(TASK_ADD_CREATE_TASK, taskAddCreateTask),
     yield takeLatest(PROJECT_EDIT_FETCH_INITIAL_DATA, projectEditFetchInitialData),
     yield takeLatest(PROJECT_EDIT_UPDATE_PROJECT, projectEditUpdateProject),
+    yield takeLatest(TASK_EDIT_FETCH_INITIAL_DATA, taskEditFetchInitialData),
+    yield takeLatest(TASK_EDIT_UPDATE_TASK, taskEditUpdateTask),
   ]);
 }

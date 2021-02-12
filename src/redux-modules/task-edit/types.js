@@ -1,0 +1,9 @@
+export const TASK_EDIT_RESET = '@@taskedit/TASK_EDIT_RESET';
+export const UPDATE_TASK = '@@taskedit/UPDATE_TASK';
+export const UPDATE_TASK_START = '@@taskedit/UPDATE_TASK_START';
+export const UPDATE_TASK_SUCCESS = '@@taskedit/UPDATE_TASK_SUCCESS';
+export const UPDATE_TASK_FAILED = '@@taskedit/UPDATE_TASK_FAILED';
+export const FETCH_INITIAL_DATA = '@@taskedit/FETCH_INITIAL_DATA';
+export const FETCH_INITIAL_DATA_START = '@@taskedit/FETCH_INITIAL_DATA_START';
+export const FETCH_INITIAL_DATA_SUCCESS = '@@taskedit/FETCH_INITIAL_DATA_SUCCESS';
+export const FETCH_INITIAL_DATA_FAILED = '@@taskedit/FETCH_INITIAL_DATA_FAILED';
