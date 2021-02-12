@@ -25,7 +25,7 @@ function Login() {
     if (status === SUBMITTED) {
       UIkit.notification({ message: 'Login success', status: 'success' });
       dispatch(reset());
-      history.push('/home');
+      history.push('/task');
     }
   }, [status]);
 
