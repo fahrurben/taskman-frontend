@@ -5,6 +5,7 @@ function App() {
   return (
     // eslint-disable-next-line react/react-in-jsx-scope
     <div className="App">
+      {/* eslint-disable-next-line react/react-in-jsx-scope */}
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
