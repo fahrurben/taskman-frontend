@@ -1,6 +1,6 @@
 import { takeLatest, all } from 'redux-saga/effects';
 
-import { AUTHENTICATE as LOGIN_AUTHENTICATE } from './redux-modules/login/types';
+import { AUTHENTICATE as LOGIN_AUTHENTICATE, FETCH_INITIAL as LOGIN_FETCH_INITIAL } from './redux-modules/login/types';
 import { REGISTER } from './redux-modules/register/types';
 import {
   FETCH_INIT_DATA as PROJECT_SEARCH_FETCH_INIT_DATA,
@@ -34,7 +34,10 @@ import {
 }
   from './redux-modules/task-edit/types';
 
-import { authenticate as loginAuthenticate } from './redux-modules/login/services';
+import {
+  authenticate as loginAuthenticate,
+  fetchInitial as loginFetchInitial,
+} from './redux-modules/login/services';
 import { register } from './redux-modules/register/services';
 
 import {
@@ -69,6 +72,7 @@ import {
 // single entry point to start all Sagas at once
 export default function* rootSaga() {
   yield all([
+    yield takeLatest(LOGIN_FETCH_INITIAL, loginFetchInitial),
     yield takeLatest(LOGIN_AUTHENTICATE, loginAuthenticate),
     yield takeLatest(REGISTER, register),
     yield takeLatest(PROJECT_SEARCH_FETCH_INIT_DATA, projectSearchFetchInitData),

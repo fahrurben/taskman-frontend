@@ -2,7 +2,19 @@ import { put } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { API_URL, AUTH_TOKEN_KEY } from '../../constant';
-import { AUTHENTICATE_START, AUTHENTICATE_SUCCESS, AUTHENTICATE_FAILED } from './types';
+import {
+  FETCH_INITIAL_START, FETCH_INITIAL_SUCCESS, FETCH_INITIAL_FAILED,
+  AUTHENTICATE_START, AUTHENTICATE_SUCCESS, AUTHENTICATE_FAILED,
+} from './types';
+
+function* fetchInitial(action) {
+  try {
+    yield put({ type: FETCH_INITIAL_START });
+    yield axios.get(`${API_URL}/`);
+  } finally {
+    yield put({ type: FETCH_INITIAL_SUCCESS, payload: { success: true, message: '' } });
+  }
+}
 
 function* authenticate(action) {
   const { email, password } = action.data;
@@ -20,5 +32,5 @@ function* authenticate(action) {
 }
 
 export {
-  authenticate,
+  fetchInitial, authenticate,
 };

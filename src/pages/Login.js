@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import classNames from 'classnames';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import UIkit from 'uikit';
-import { authenticate, reset } from '../redux-modules/login/actions';
+import { fetchInitial, authenticate, reset } from '../redux-modules/login/actions';
 import { SUBMITTED } from '../constant';
 
 function Login() {
@@ -12,11 +13,16 @@ function Login() {
   const history = useHistory();
   const dispatch = useDispatch();
   const status = useSelector((state) => state.login.status);
+  const isLoading = useSelector((state) => state.login.isLoading);
   const response = useSelector((state) => state.login.response);
 
   const onFormSubmit = (data) => {
     dispatch(authenticate(data));
   };
+
+  useEffect(() => {
+    dispatch(fetchInitial());
+  }, []);
 
   useEffect(() => {
   }, [response]);
@@ -32,12 +38,23 @@ function Login() {
   const emailValidation = { required: { value: true, message: 'Email is required' } };
   const passwordValidation = { required: { value: true, message: 'Password is required' } };
 
+  const formClass = classNames(
+    {
+      'uk-hidden': isLoading,
+    },
+  );
+  const spinnerClass = classNames(
+    'uk-text-center',
+    {
+      'uk-hidden': !isLoading,
+    },
+  );
   return (
     <div className="uk-container">
       <div className="uk-grid uk-flex-center uk-flex-middle login-main-container">
         <div>
           <div className="uk-card uk-card-default uk-card-body login-body-container">
-            <form>
+            <form className={formClass}>
               <fieldset className="uk-fieldset">
 
                 <legend className="uk-legend">Login</legend>
@@ -96,6 +113,9 @@ function Login() {
 
               </fieldset>
             </form>
+            <div className={spinnerClass}>
+              <span className="uk-margin-small-right" data-uk-spinner="ratio: 1.5" />
+            </div>
           </div>
         </div>
       </div>

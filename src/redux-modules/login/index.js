@@ -1,5 +1,8 @@
 import { READY, SUBMITTED } from '../../constant';
-import { AUTHENTICATE_SUCCESS, AUTHENTICATE_FAILED, LOGIN_RESET } from './types';
+import {
+  FETCH_INITIAL_START, FETCH_INITIAL_SUCCESS,
+  AUTHENTICATE_SUCCESS, AUTHENTICATE_FAILED, LOGIN_RESET,
+} from './types';
 
 function login(state = {
   status: READY,
@@ -12,6 +15,16 @@ function login(state = {
   let status = null;
 
   switch (action.type) {
+    case FETCH_INITIAL_START:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case FETCH_INITIAL_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+      };
     case AUTHENTICATE_SUCCESS:
       return {
         ...state,
