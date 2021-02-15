@@ -11,12 +11,15 @@ function* fetchInitial(action) {
   try {
     yield put({ type: FETCH_INITIAL_START });
     yield axios.get(`${API_URL}/`);
+    // eslint-disable-next-line no-empty
+  } catch (e) {
   } finally {
     yield put({ type: FETCH_INITIAL_SUCCESS, payload: { success: true, message: '' } });
   }
 }
 
 function* authenticate(action) {
+  console.log('hi');
   const { email, password } = action.data;
 
   let response = null;

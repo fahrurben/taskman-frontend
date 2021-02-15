@@ -72,8 +72,8 @@ import {
 // single entry point to start all Sagas at once
 export default function* rootSaga() {
   yield all([
-    yield takeLatest(LOGIN_FETCH_INITIAL, loginFetchInitial),
     yield takeLatest(LOGIN_AUTHENTICATE, loginAuthenticate),
+    yield takeLatest(LOGIN_FETCH_INITIAL, loginFetchInitial),
     yield takeLatest(REGISTER, register),
     yield takeLatest(PROJECT_SEARCH_FETCH_INIT_DATA, projectSearchFetchInitData),
     yield takeLatest(TASK_SEARCH_FETCH_INIT_DATA, taskSearchFetchInitData),
