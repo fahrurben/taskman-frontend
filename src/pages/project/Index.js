@@ -14,10 +14,10 @@ function Index() {
   const { register, handleSubmit } = useForm();
 
   const dispatch = useDispatch();
-  const isLoading = useSelector((state) => state.projectIndex.isLoading);
-  const data = useSelector((state) => state.projectIndex.data);
-  const page = useSelector((state) => state.projectIndex.page);
-  const totalPage = useSelector((state) => state.projectIndex.totalPage);
+  const loading = useSelector((state) => state.status.loading);
+  const data = useSelector((state) => state.projects.data);
+  const page = useSelector((state) => state.projects.page);
+  const totalPage = useSelector((state) => state.projects.totalPage);
 
   useEffect(() => {
     dispatch(fetchInitialData());
@@ -43,14 +43,14 @@ function Index() {
   const tableClass = classNames(
     'uk-table uk-table-striped uk-table-small uk-table-divider',
     {
-      'uk-hidden': isLoading,
+      'uk-hidden': loading,
     },
   );
 
   const spinnerClass = classNames(
     'uk-text-center',
     {
-      'uk-hidden': !isLoading,
+      'uk-hidden': !loading,
     },
   );
 

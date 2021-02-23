@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux';
+import statusReducer from './status';
+import projectsReducer from './projects';
 import loginReducer from './login';
 import registerReducer from './register';
 import projectReducer from './project-index';
@@ -9,6 +11,8 @@ import taskAddReducer from './task-add';
 import taskEditReducer from './task-edit';
 
 const rootReducers = combineReducers({
+  status: statusReducer,
+  projects: projectsReducer,
   login: loginReducer,
   register: registerReducer,
   projectIndex: projectReducer,
