@@ -17,6 +17,7 @@ import {
 } from './types';
 import { FETCH_FAILED, FETCH_START, FETCH_SUCCESS } from '../status/types';
 import { SET_PROJECTS } from '../projects/types';
+import { PROJECT_RESOURCES, SET_PAGINATION_RESOURCES } from '../types';
 
 function* fetchInitialData() {
   const page = 1;
@@ -25,12 +26,15 @@ function* fetchInitialData() {
     yield put({ type: FETCH_START });
     response = yield post(`${API_URL}/project/search/${page}`, { name: '' });
     yield put({
-      type: SET_PROJECTS,
-      payload: response.data.data,
-      meta: {
+      type: SET_PAGINATION_RESOURCES,
+      payload: {
+        data: response.data.data,
         page,
         totalPage: response.data.totalPage,
         perPage: response.data.perPage,
+      },
+      meta: {
+        type: PROJECT_RESOURCES,
       },
     });
     yield put({ type: FETCH_SUCCESS });

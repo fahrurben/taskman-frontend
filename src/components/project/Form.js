@@ -20,7 +20,14 @@ function Form({
               inputRef={register({ required: { value: true, message: 'Name is required' } })}
               error={errors?.name}
             />
-            <TextInput id="desc" name="desc" label="Description" inputRef={register({})} />
+            <TextInput
+              id="desc"
+              name="desc"
+              label="Description"
+              required="true"
+              inputRef={register()}
+              error={errors?.desc}
+            />
           </div>
         </fieldset>
       </form>

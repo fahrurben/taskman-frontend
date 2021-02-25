@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import statusReducer from './status';
-import projectsReducer from './projects';
+import createPaginationResources from './pagination-resouces';
 import loginReducer from './login';
 import registerReducer from './register';
 import projectReducer from './project-index';
@@ -9,6 +9,9 @@ import projectEditReducer from './project-edit';
 import taskReducer from './task-index';
 import taskAddReducer from './task-add';
 import taskEditReducer from './task-edit';
+import { PROJECT_RESOURCES } from './types';
+
+const projectsReducer = createPaginationResources(PROJECT_RESOURCES);
 
 const rootReducers = combineReducers({
   status: statusReducer,

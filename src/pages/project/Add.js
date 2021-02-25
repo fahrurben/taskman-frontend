@@ -9,11 +9,13 @@ import { createProject, resetProjectAdd } from '../../redux-modules/project-add/
 import { FAILED, SUBMITTED } from '../../constant';
 
 function Add() {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors: formErrors } = useForm();
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const status = useSelector((state) => state.projectCreate.status);
+  const formStatus = useSelector((state) => state.projectCreate.status);
+  const errors = useSelector((state) => state.status.errors);
+  const loading = useSelector((state) => state.status.loading);
   const response = useSelector((state) => state.projectCreate.response);
 
   const onFormSubmit = (data) => {
@@ -21,18 +23,18 @@ function Add() {
   };
 
   useEffect(() => {
-    if (response.status === FAILED) {
-      UIkit.notification({ message: response.message, status: 'danger' });
+    if (errors !== null) {
+      UIkit.notification({ message: errors?.message, status: 'danger' });
     }
-  }, [response]);
+  }, [errors]);
 
   useEffect(() => {
-    if (status === SUBMITTED) {
+    if (formStatus === SUBMITTED) {
       UIkit.notification({ message: 'Add Project Success', status: 'success' });
       dispatch(resetProjectAdd());
       history.push('/project');
     }
-  }, [status]);
+  }, [formStatus]);
 
   useEffect(() => {
     dispatch(resetProjectAdd());
@@ -48,7 +50,7 @@ function Add() {
       <FormProject
         title="Create Project"
         register={register}
-        errors={errors}
+        errors={formErrors}
         onFormSubmit={onFormSubmit}
         handleSubmit={handleSubmit}
       />
