@@ -1,5 +1,4 @@
 // eslint-disable-next-line import/named
-import { ajaxPostFunctionCreator } from '../../helpers/AxiosWrapper';
 import postActionCreator from '../create-action-helper/PostActionCreator';
 import {
   API_URL,
@@ -10,9 +9,7 @@ import {
 } from './types';
 
 function* createProject(action) {
-  const ajaxFunction = ajaxPostFunctionCreator(`${API_URL}/project/`);
-  const postActionFunction = postActionCreator(ajaxFunction, CREATE_PROJECT_SUCCESS);
-  yield postActionFunction(action);
+  yield postActionCreator(`${API_URL}/project/`, CREATE_PROJECT_SUCCESS)(action);
 }
 
 export {

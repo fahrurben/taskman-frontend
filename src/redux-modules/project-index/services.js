@@ -1,23 +1,37 @@
-import { put } from 'redux-saga/effects';
+import { put, call } from 'redux-saga/effects';
 import { get, post } from '../../helpers/AxiosWrapper';
 import {
   API_URL,
 } from '../../constant';
 
 import {
-  FETCH_INIT_DATA_START,
-  FETCH_INIT_DATA_SUCCESS,
-  FETCH_INIT_DATA_FAILED,
-  FETCH_DATA_START,
-  FETCH_DATA_SUCCESS,
-  FETCH_DATA_FAILED,
   DELETE_PROJECT_START,
   DELETE_PROJECT_SUCCESS,
   DELETE_PROJECT_FAILED, FETCH_INIT_DATA,
 } from './types';
 import { FETCH_FAILED, FETCH_START, FETCH_SUCCESS } from '../status/types';
-import { SET_PROJECTS } from '../projects/types';
 import { PROJECT_RESOURCES, SET_PAGINATION_RESOURCES } from '../types';
+
+function* receiveResponse(response, page, filter) {
+  yield put({
+    type: SET_PAGINATION_RESOURCES,
+    payload: {
+      data: response.data.data,
+      page,
+      totalPage: response.data.totalPage,
+      perPage: response.data.perPage,
+    },
+    meta: {
+      type: PROJECT_RESOURCES,
+    },
+  });
+  yield put({ type: FETCH_SUCCESS });
+}
+
+function* receiveErrors(exception) {
+  const errors = exception?.response?.data;
+  yield put({ type: FETCH_FAILED, payload: errors });
+}
 
 function* fetchInitialData() {
   const page = 1;
@@ -25,22 +39,9 @@ function* fetchInitialData() {
   try {
     yield put({ type: FETCH_START });
     response = yield post(`${API_URL}/project/search/${page}`, { name: '' });
-    yield put({
-      type: SET_PAGINATION_RESOURCES,
-      payload: {
-        data: response.data.data,
-        page,
-        totalPage: response.data.totalPage,
-        perPage: response.data.perPage,
-      },
-      meta: {
-        type: PROJECT_RESOURCES,
-      },
-    });
-    yield put({ type: FETCH_SUCCESS });
+    yield call(receiveResponse, response, page);
   } catch (e) {
-    const errors = e?.response?.data;
-    yield put({ type: FETCH_FAILED, payload: errors });
+    yield call(receiveErrors, e);
   }
 }
 
@@ -51,19 +52,9 @@ function* fetchData(action) {
   try {
     yield put({ type: FETCH_START });
     response = yield post(`${API_URL}/project/search/${page}`, filter);
-    yield put({
-      type: SET_PROJECTS,
-      payload: response.data.data,
-      meta: {
-        page,
-        totalPage: response.data.totalPage,
-        perPage: response.data.perPage,
-      },
-    });
-    yield put({ type: FETCH_SUCCESS });
+    yield call(receiveResponse, response, page);
   } catch (e) {
-    const errors = e?.response?.data;
-    yield put({ type: FETCH_FAILED, payload: errors });
+    yield call(receiveErrors, e);
   }
 }
 
