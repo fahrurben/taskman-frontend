@@ -1,4 +1,5 @@
 import { AUTH_TOKEN_KEY } from '../constant';
+import { post } from './AxiosWrapper';
 
 function getHeaderConfig() {
   return {

@@ -19,4 +19,10 @@ function get(url) {
   return axios.get(url, config);
 }
 
-export { get, post };
+function ajaxPostFunctionCreator(url) {
+  return function ajaxFunction(data) {
+    return post(url, data);
+  };
+}
+
+export { get, post, ajaxPostFunctionCreator };
