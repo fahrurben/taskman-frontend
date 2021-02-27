@@ -4,16 +4,18 @@ import {
   API_URL,
 } from '../../constant';
 import {
-  FETCH_INITIAL_DATA_START, FETCH_INITIAL_DATA_SUCCESS, FETCH_INITIAL_DATA_FAILED,
-  UPDATE_TASK_START, UPDATE_TASK_SUCCESS, UPDATE_TASK_FAILED,
+  FETCH_INITIAL_DATA_SUCCESS,
+  UPDATE_TASK_SUCCESS,
 } from './types';
+import { FETCH_FAILED, FETCH_START } from '../status/types';
+import postActionCreator from '../create-action-helper/PostActionCreator';
 
 function* fetchInitialData(action) {
   const { id } = action;
   let response = null;
   let getProjectResponse = null;
   try {
-    yield put({ type: FETCH_INITIAL_DATA_START });
+    yield put({ type: FETCH_START });
     getProjectResponse = yield get(`${API_URL}/project`);
     response = yield get(`${API_URL}/task/${id}`);
     yield put({
@@ -24,27 +26,14 @@ function* fetchInitialData(action) {
       },
     });
   } catch (e) {
-    const errorMessage = e?.response?.data?.message;
-    yield put({ type: FETCH_INITIAL_DATA_FAILED, payload: { message: errorMessage } });
+    const errors = e?.response?.data;
+    yield put({ type: FETCH_FAILED, payload: errors });
   }
 }
 
 function* updateTask(action) {
-  const { id, data } = action;
-  let response = null;
-  try {
-    yield put({ type: UPDATE_TASK_START });
-    response = yield post(`${API_URL}/task/${id}`, data);
-    yield put({
-      type: UPDATE_TASK_SUCCESS,
-      payload: {
-        data: response.data,
-      },
-    });
-  } catch (e) {
-    const errorMessage = e?.response?.data?.message;
-    yield put({ type: UPDATE_TASK_FAILED, payload: { message: errorMessage } });
-  }
+  const { id } = action;
+  yield postActionCreator(`${API_URL}/task/${id}`, UPDATE_TASK_SUCCESS)(action);
 }
 
 export { fetchInitialData, updateTask };

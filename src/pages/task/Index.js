@@ -16,10 +16,10 @@ function Index() {
   const { register, handleSubmit } = useForm();
 
   const dispatch = useDispatch();
-  const isLoading = useSelector((state) => state.taskIndex.isLoading);
-  const data = useSelector((state) => state.taskIndex.data);
-  const page = useSelector((state) => state.taskIndex.page);
-  const totalPage = useSelector((state) => state.taskIndex.totalPage);
+  const loading = useSelector((state) => state.status.loading);
+  const data = useSelector((state) => state.tasks.data);
+  const page = useSelector((state) => state.tasks.page);
+  const totalPage = useSelector((state) => state.tasks.totalPage);
 
   useEffect(() => {
     dispatch(fetchInitialData());
@@ -46,14 +46,14 @@ function Index() {
   const tableClass = classNames(
     'uk-table uk-table-striped uk-table-small uk-table-divider',
     {
-      'uk-hidden': isLoading,
+      'uk-hidden': loading,
     },
   );
 
   const spinnerClass = classNames(
     'uk-text-center',
     {
-      'uk-hidden': !isLoading,
+      'uk-hidden': !loading,
     },
   );
 
