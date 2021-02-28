@@ -15,8 +15,6 @@ function Add() {
   const dispatch = useDispatch();
   const formStatus = useSelector((state) => state.projectCreate.status);
   const errors = useSelector((state) => state.status.errors);
-  const loading = useSelector((state) => state.status.loading);
-  const response = useSelector((state) => state.projectCreate.response);
 
   const onFormSubmit = (data) => {
     dispatch(createProject(data));

@@ -10,14 +10,16 @@ import FormProject from '../../components/project/Form';
 import { resetProjectAdd } from '../../redux-modules/project-add/actions';
 
 function Edit() {
-  const { register, handleSubmit, setValue } = useForm();
+  const {
+    register, control, handleSubmit, errors: formErrors, setValue,
+  } = useForm();
 
   const { id } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-  const status = useSelector((state) => state.projectEdit.status);
-  const response = useSelector((state) => state.projectEdit.response);
+  const formStatus = useSelector((state) => state.projectEdit.status);
   const project = useSelector((state) => state.projectEdit.project);
+  const errors = useSelector((state) => state.status.errors);
 
   const onFormSubmit = (data) => {
     dispatch(updateProject(id, data));
@@ -41,18 +43,26 @@ function Edit() {
   }, [project]);
 
   useEffect(() => {
-    if (status === SUBMITTED) {
+    if (formStatus === SUBMITTED) {
       UIkit.notification({ message: 'Update Project Success', status: 'success' });
       dispatch(resetEditProject());
       history.push('/project');
     }
-  }, [status]);
+  }, [formStatus]);
+
+  useEffect(() => {
+    if (errors !== null) {
+      UIkit.notification({ message: errors?.message, status: 'danger' });
+    }
+  }, [errors]);
 
   return (
     <div className="main-wrapper">
       <FormProject
         title="Update Project"
+        control={control}
         register={register}
+        errors={formErrors}
         onFormSubmit={onFormSubmit}
         handleSubmit={handleSubmit}
       />

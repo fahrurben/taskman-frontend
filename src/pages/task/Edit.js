@@ -11,16 +11,16 @@ import FormEdit from '../../components/task/FormEdit';
 
 function Edit() {
   const {
-    register, control, handleSubmit, errors, setValue,
+    register, control, handleSubmit, errors: formErrors, setValue,
   } = useForm();
 
   const { id } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-  const status = useSelector((state) => state.taskEdit.status);
-  const response = useSelector((state) => state.taskEdit.response);
+  const formStatus = useSelector((state) => state.taskEdit.status);
   const task = useSelector((state) => state.taskEdit.task);
-  const projects = useSelector((state) => state.taskEdit.projects);
+  const projects = useSelector((state) => state.projectLookups);
+  const errors = useSelector((state) => state.status.errors);
 
   const onFormSubmit = (data) => {
     const taskData = { ...data };
@@ -39,7 +39,7 @@ function Edit() {
   }, []);
 
   useEffect(() => {
-    if (task !== null) {
+    if (task != null) {
       setValue('no', task.no);
       setValue('project', task.project);
       setValue('title', task.title);
@@ -54,12 +54,18 @@ function Edit() {
   }, [task]);
 
   useEffect(() => {
-    if (status === SUBMITTED) {
+    if (formStatus === SUBMITTED) {
       UIkit.notification({ message: 'Update Task Success', status: 'success' });
       dispatch(resetEditTask());
       history.push('/task');
     }
-  }, [status]);
+  }, [formStatus]);
+
+  useEffect(() => {
+    if (errors !== null) {
+      UIkit.notification({ message: errors?.message, status: 'danger' });
+    }
+  }, [errors]);
 
   return (
     <div className="main-wrapper">
@@ -67,7 +73,7 @@ function Edit() {
         handleSubmit={handleSubmit}
         register={register}
         control={control}
-        errors={errors}
+        errors={formErrors}
         title="Update Task"
         projects={projects}
         onFormSubmit={onFormSubmit}

@@ -1,5 +1,7 @@
+import { handleActions } from 'redux-actions';
 import {
-  READY, SUBMITTED,
+  INITIAL,
+  SUBMITTED,
 } from '../../constant';
 
 import {
@@ -7,23 +9,27 @@ import {
   PROJECT_ADD_RESET,
 } from './types';
 
-function reducer(state = {
-  status: READY,
-}, action) {
-  switch (action.type) {
-    case CREATE_PROJECT_SUCCESS:
-      return {
+const reducer = handleActions(
+  new Map([
+    [
+      PROJECT_ADD_RESET,
+      (state, action) => ({
+        ...state,
+        status: INITIAL,
+      }),
+    ],
+
+    [
+      CREATE_PROJECT_SUCCESS,
+      (state, action) => ({
         ...state,
         status: SUBMITTED,
-      };
-    case PROJECT_ADD_RESET:
-      return {
-        ...state,
-        status: READY,
-      };
-    default:
-      return { ...state };
-  }
-}
+      }),
+    ],
+  ]),
+  {
+    status: INITIAL,
+  },
+);
 
 export default reducer;

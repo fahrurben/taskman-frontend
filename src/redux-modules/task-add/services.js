@@ -9,6 +9,7 @@ import {
 } from './types';
 import postActionCreator from '../create-action-helper/PostActionCreator';
 import { FETCH_FAILED, FETCH_START, FETCH_SUCCESS } from '../status/types';
+import { PROJECT_LOOKUPS, SET_LOOKUP_RESOURCES } from '../types';
 
 function* fetchInitialData(action) {
   const { id } = action;
@@ -17,9 +18,10 @@ function* fetchInitialData(action) {
     yield put({ type: FETCH_START });
     response = yield get(`${API_URL}/project`);
     yield put({
-      type: FETCH_INITIAL_DATA_SUCCESS,
-      payload: {
-        data: response.data,
+      type: SET_LOOKUP_RESOURCES,
+      payload: response.data,
+      meta: {
+        type: PROJECT_LOOKUPS,
       },
     });
     yield put({ type: FETCH_SUCCESS });

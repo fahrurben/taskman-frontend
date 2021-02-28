@@ -8,15 +8,19 @@ import projectEditReducer from './project-edit';
 import taskReducer from './task-index';
 import taskAddReducer from './task-add';
 import taskEditReducer from './task-edit';
-import { PROJECT_RESOURCES, TASK_RESOURCES } from './types';
+import { PROJECT_LOOKUPS, PROJECT_RESOURCES, TASK_RESOURCES } from './types';
+import createLookupResources from './lookup-resources';
 
 const projectsReducer = createPaginationResources(PROJECT_RESOURCES);
 const tasksReducer = createPaginationResources(TASK_RESOURCES);
+
+const projectLookupsReducer = createLookupResources(PROJECT_LOOKUPS);
 
 const rootReducers = combineReducers({
   status: statusReducer,
   projects: projectsReducer,
   tasks: tasksReducer,
+  projectLookups: projectLookupsReducer,
   login: loginReducer,
   register: registerReducer,
   projectCreate: projectCreateReducer,

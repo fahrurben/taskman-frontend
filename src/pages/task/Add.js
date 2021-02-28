@@ -11,14 +11,14 @@ import { createTask, fetchInitialData, taskAddReset } from '../../redux-modules/
 
 function Add() {
   const {
-    register, control, handleSubmit, errors,
+    register, control, handleSubmit, errors: formErrors,
   } = useForm();
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const projects = useSelector((state) => state.taskAdd.projects);
-  const status = useSelector((state) => state.taskAdd.status);
-  const response = useSelector((state) => state.taskAdd.response);
+  const projects = useSelector((state) => state.projectLookups);
+  const formStatus = useSelector((state) => state.taskAdd.status);
+  const errors = useSelector((state) => state.status.errors);
 
   useEffect(() => {
     dispatch(fetchInitialData());
@@ -38,18 +38,18 @@ function Add() {
   };
 
   useEffect(() => {
-    if (response.status === FAILED) {
-      UIkit.notification({ message: response.message, status: 'danger' });
+    if (errors !== null) {
+      UIkit.notification({ message: errors?.message, status: 'danger' });
     }
-  }, [response]);
+  }, [errors]);
 
   useEffect(() => {
-    if (status === SUBMITTED) {
+    if (formStatus === SUBMITTED) {
       UIkit.notification({ message: 'Add Task Success', status: 'success' });
       dispatch(taskAddReset());
       history.push('/task');
     }
-  }, [status]);
+  }, [formStatus]);
 
   return (
     <div className="main-wrapper">
@@ -57,7 +57,7 @@ function Add() {
         handleSubmit={handleSubmit}
         register={register}
         control={control}
-        errors={errors}
+        errors={formErrors}
         title="Create Task"
         projects={projects}
         onFormSubmit={onFormSubmit}
